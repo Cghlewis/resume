@@ -1,0 +1,157 @@
+---
+title: "Crystal Lewis Resume"
+author: Crystal Lewis
+date: "`r Sys.Date()`"
+params:
+  pdf_mode:
+    value: true
+output:
+  pagedown::html_resume:
+    css: ['dd_cv.css', 'custom.css',  'resume']
+    self_contained: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+
+library(magrittr) # For the pipe
+library(googlesheets4)
+source("cv_printing_functions.r")
+
+# require(devtools)
+# install_version("googlesheets4", version = "0.1.0")
+# issues with 'sheets_deauth' not being in newest googlesheets4 version
+
+# Read in all data and initialize a CV printer object
+CV <- create_CV_object(
+  data_location = "https://docs.google.com/spreadsheets/d/1LU3QPm4eVbUZcZCAWLs8FzM2OxmyeVWSV0HAMofamSo/edit#gid=917338460",  
+  pdf_mode = params$pdf_mode
+)
+
+CV$entries_data <- CV$entries_data %>% dplyr::filter(in_resume == TRUE)
+
+```
+
+
+```{r}
+# When in pdf export mode the little dots are unaligned, so fix that with some conditional CSS.
+if(params$pdf_mode) {
+    cat("
+<style>
+:root{
+  --decorator-outer-offset-left: -6.5px;
+}
+</style>")
+}
+```
+
+
+Aside
+================================================================================
+
+![logo](me2022.jpg){width=100%}
+
+Contact
+--------------------------------------------------------------------------------
+
+- <i class="fa fa-envelope"></i> cgh.lewis@gmail.com
+- <i class="fa fa-twitter"></i> /Cghlewis
+- <i class="fa fa-github"></i> /Cghlewis
+- <img src="https://img.icons8.com/material/16/000000/tableau-software.png"/> /crystal.lewis
+- <i class="fab fa-linkedin-in"></i> /crystal-lewis-922b4193
+
+
+Technical Skills {#skills}
+--------------------------------------------------------------------------------
+
+- Proficient:
+
+  - R
+  - SPSS
+  - Access
+  - Qualtrics
+  - Quick Base
+
+- Working knowledge:
+  - Tableau 
+  - Git and GitHub 
+  - SQL 
+  - SAS 
+  - Stata
+  - SharePoint
+
+Service
+--------------------------------------------------------------------------------
+
+  + POWER Data Management Hub Organizer (2022 - present)
+  
+  + R-Ladies St. Louis Co-organizer (2020-present) 
+  
+  + LaunchCode CoderGirl Teaching Assistant (2018)  
+  
+  + AmeriCorps St. Louis Education Team (2007-2008)  
+
+
+Main
+================================================================================
+
+Crystal Lewis {#title}
+--------------------------------------------------------------------------------
+
+```{r}
+# Note the special double pipe so we modify the CV object in place
+CV %<>% print_text_block("intro") 
+```
+
+
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('education')
+```
+
+
+
+Professional Experience {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('professional_experience')
+```
+
+
+Publications {data-icon=book}
+--------------------------------------------------------------------------------
+
+
+```{r}
+CV %<>% print_section('academic_articles')
+```
+
+
+```{r}
+CV %<>% print_links()
+```
+
+
+Presentations {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('presentations')
+```
+
+
+::: aside
+Made with the R packages **pagedown** and **datadrivencv**.
+
+The source code is available **github.com/Cghlewis/resume**.
+
+Last updated on `r Sys.Date()`.
+
+:::

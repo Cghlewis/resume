@@ -1,0 +1,69 @@
+---
+title: "Crystal Lewis Resume"
+author: Crystal Lewis
+date: "`r Sys.Date()`"
+params:
+  pdf_mode:
+    value: true
+output:
+  pagedown::html_resume:
+    css: ['dd_cv.css', 'custom.css',  'resume']
+    self_contained: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+
+library(magrittr) # For the pipe
+library(googlesheets4)
+source("cv_printing_functions.r")
+
+# Read in all data and initialize a CV printer object
+CV <- create_CV_object(
+  data_location = "https://docs.google.com/spreadsheets/d/1LU3QPm4eVbUZcZCAWLs8FzM2OxmyeVWSV0HAMofamSo/edit#gid=917338460",  
+  pdf_mode = params$pdf_mode
+)
+
+CV$entries_data <- CV$entries_data %>% dplyr::filter(in_resume == TRUE)
+
+```
+
+
+```{r}
+# When in pdf export mode the little dots are unaligned, so fix that with some conditional CSS.
+if(params$pdf_mode) {
+    cat("
+<style>
+:root{
+  --decorator-outer-offset-left: -6.5px;
+}
+</style>")
+}
+```
+
+
+Crystal Lewis {#title}
+--------------------------------------------------------------------------------
+
+09/26/2021
+
+Urban Institute  
+Center on Education Data and Policy  
+Re: Senior Education Data and Research Associate
+
+Dear Hiring Team,
+
+I first learned of and accessed the Education Data Portal api using R earlier this year. I have only briefly used institutional data when I volunteered with CoderGirl, a bootcamp teaching women data analysis skills. We had them use College Scorecard data for a project and I remember having to find, interpret, download, and import csv files into R. When I found the Education Data Portal, I shared it with the bootcamp team and said, use this instead! I quickly saw the importance of having easily accessible, democratized data, in allowing everyone to have a voice in education decision making, not just those who know how to navigate complicated data structures. 
+
+Eight years ago I started my role at Missouri Prevention Science Institute, overseeing two Institute of Education Sciences funded RCT grants, including hiring, budgets, recruitment, and data collection. I took the position because I wanted to evaluate the effectiveness of education programs. While I loved being on the ground, collecting the data in schools, I disliked working with disorganized data systems (both internally and externally) and feeling like all of our hard work could be wasted if our data was not entered, documented, or stored correctly. I eventually realized my true passion was creating and implementing data systems that improved efficiency, data quality, data security, and preservation. 
+
+I began writing code to wrangle data, however, as most data managers know, data management does not simply start after the data is collected and stop after the data is cleaned. To improve the data lifecycle, I developed protocols, built style guides, implemented staff training, and worked with our IT team to overhaul our data storage and sharing systems. I have written data validation syntax, improved project documentation, and harmonized datasets over time. As I have built these systems, I have published them on a GitHub page and shared them with a wider audience. Through sharing these resources, I have spoken with other researchers, helping me to revise and supplement my resources, and I have even been written into grants outside of my university to consult on data management practices in education. 
+
+While I am really proud of all of the systems I have put in place for the MPSI, I would love to grow in my career by working with the Urban Institute, learning how your team manages and maintains the Education Data Portal. Collaborating with internal teams and external stakeholders, I would also be excited to help expand the Portal’s reach through training, blogs, and the construction of tools. I am a firm believer that if data is not accurate, documented, or accessible, we are doing a disservice to not only our end-users but also to the people who we collect data from. I would be honored to lead the development and expansion of quality and accessible data in the Education Data Portal. Thank you for your time.
+
+Sincerely,
+
+Crystal Lewis
