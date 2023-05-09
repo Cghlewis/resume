@@ -21,8 +21,8 @@ library(magrittr) # For the pipe
 library(googlesheets4)
 source("cv_printing_functions.r")
 
-# require(devtools)
-# install_version("googlesheets4", version = "0.1.0")
+#require(devtools)
+#install_version("googlesheets4", version = "0.1.0")
 # issues with 'sheets_deauth' not being in newest googlesheets4 version
 
 # Read in all data and initialize a CV printer object
@@ -57,10 +57,10 @@ Aside
 Contact
 --------------------------------------------------------------------------------
 
-- <i class="fa fa-envelope"></i> cgh.lewis@gmail.com
+- <i class="fa fa-link"></i> cghlewis.com
+- <i class="fa fa-envelope"></i> cgh.lewis\@gmail.com
 - <i class="fa fa-twitter"></i> /Cghlewis
 - <i class="fa fa-github"></i> /Cghlewis
-- <img src="https://img.icons8.com/material/16/000000/tableau-software.png"/> /crystal.lewis
 - <i class="fab fa-linkedin-in"></i> /crystal-lewis-922b4193
 
 
