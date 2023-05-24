@@ -69,17 +69,16 @@ Technical Skills {#skills}
 
 - Proficient:
 
-  - R
+  - R (data wrangling)
   - SPSS
   - Access
   - Qualtrics
   - Quick Base
 
 - Working knowledge:
-  - Tableau 
+  - RMarkdown/Quarto (reporting)
   - Git and GitHub 
   - SQL 
-  - SAS 
   - Stata
   - SharePoint
 
